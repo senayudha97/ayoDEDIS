@@ -228,7 +228,7 @@ class _HomeState extends State<Home> {
               MaterialPageRoute(
                   builder: (context) => SecondScreen(
                         // coba: controllerTxt.text,
-                        usia: controllerUsia, jk: _jk,
+                        usia: controllerUsia.text, jk: _jk,
                       )),
             );
           },

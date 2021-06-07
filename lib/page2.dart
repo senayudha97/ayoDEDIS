@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SecondScreen extends StatefulWidget {
-  var usia;
-  var jk;
+  String usia;
+  String jk;
   SecondScreen({this.usia, this.jk});
 
   @override
@@ -12,10 +12,13 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _SecondScreenState extends State<SecondScreen> {
+  String _usia;
+  String _jk;
+
   @override
   void initState() {
-    var _usia = widget.usia;
-    var _jk = widget.jk;
+    _usia = widget.usia;
+    _jk = widget.jk;
     super.initState();
   }
 
@@ -189,7 +192,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(15),
                       child: Text(
-                        "Hold var hasil 1",
+                        _usia,
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -219,7 +222,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(15),
                       child: Text(
-                        "Hold var hasil 2",
+                        _jk,
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
