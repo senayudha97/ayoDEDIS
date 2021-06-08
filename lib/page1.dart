@@ -16,13 +16,14 @@ class _HomeState extends State<Home> {
       body: Center(
         child: Column(
           children: [
+            // ignore: deprecated_member_use
             RaisedButton(
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => SecondScreen(
-                            usia: "123",
+                            usia: 123,
                           )),
                 );
               },

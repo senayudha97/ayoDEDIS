@@ -93,6 +93,7 @@ class _ProsesDataState extends State<ProsesData> {
       );
     }
 
+    // ignore: unused_element
     Widget buildSignUpButton() {
       return GestureDetector(
         onTap: () => print("Sign Up Pressed"),

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// ignore: must_be_immutable
 class SecondScreen extends StatefulWidget {
-  String usia;
-  String jk;
+  var usia;
+  var jk;
   SecondScreen({this.usia, this.jk});
 
   @override
@@ -12,14 +13,25 @@ class SecondScreen extends StatefulWidget {
 }
 
 class _SecondScreenState extends State<SecondScreen> {
-  String _usia;
-  String _jk;
+  // Variable
+  var _usia;
+  var _jk;
+  var _hasil1;
 
+// Method customize
   @override
   void initState() {
     _usia = widget.usia;
     _jk = widget.jk;
     super.initState();
+  }
+
+// Controller
+  TextEditingController controllerBB = new TextEditingController();
+
+  String hitung1() {
+    _hasil1 = _usia * 2 + 8;
+    return "$_hasil1";
   }
 
   @override
@@ -49,6 +61,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 ]),
             height: 60,
             child: TextField(
+              controller: controllerBB,
               keyboardType: TextInputType.number,
               style: TextStyle(color: Colors.black87),
               decoration: InputDecoration(
@@ -113,7 +126,12 @@ class _SecondScreenState extends State<SecondScreen> {
         width: double.infinity,
         // ignore: deprecated_member_use
         child: RaisedButton(
-          onPressed: () => {print(SecondScreen().usia)},
+          onPressed: () {
+            setState(() {
+              _hasil1 = (int.parse(controllerBB.text) / _usia * 2) + 8;
+              // print(_hasil1);
+            });
+          },
           padding: EdgeInsets.all(15),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -192,7 +210,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(15),
                       child: Text(
-                        _usia,
+                        (_hasil1 == null) ? '' : "$_hasil1",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
