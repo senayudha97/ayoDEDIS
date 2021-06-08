@@ -3,45 +3,88 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
-class SecondScreen extends StatefulWidget {
-  var usia;
-  var jk;
-  SecondScreen({this.usia, this.jk});
-
+class Home extends StatefulWidget {
   @override
-  _SecondScreenState createState() => _SecondScreenState();
+  _HomeState createState() => _HomeState();
 }
 
-class _SecondScreenState extends State<SecondScreen> {
+class _HomeState extends State<Home> {
   // Variable
+  // ignore: unused_field
   var _usia;
+  // ignore: unused_field
   var _jk;
-  var _hasil1;
+  var _nilaiBMI;
+  // ignore: unused_field
+  var _decissionBMI;
 
 // Method customize
-  @override
-  void initState() {
-    _usia = widget.usia;
+  void _hitungBMI(var bb, var tt) {
+    setState(() {
+      _nilaiBMI = bb / ((tt / 100) * (tt / 100));
 
-    if (widget.jk == "L") {
-      _jk = "Laki-Laki";
-    } else if (widget.jk == "P") {
-      _jk = "Perempuan";
-    }
-    super.initState();
+      if (_nilaiBMI < 18.5) {
+        _decissionBMI = "BMI : Kurus";
+      } else if (_nilaiBMI > 18.5 && _nilaiBMI < 25.0) {
+        _decissionBMI = "BMI : Normal";
+      } else if (_nilaiBMI > 25.0 && _nilaiBMI < 27.0) {
+        _decissionBMI = "BMI : Kelebihan BB Tingkat Ringan";
+      } else if (_nilaiBMI > 27.0) {
+        _decissionBMI = "BMI : Kelebihan BB Tingkat Berat";
+      }
+    });
   }
 
 // Controller
   TextEditingController controllerBB = new TextEditingController();
-
-  String hitung1() {
-    _hasil1 = _usia * 2 + 8;
-    return "$_hasil1";
-  }
+  TextEditingController controllerTT = new TextEditingController();
+  TextEditingController controllerUsia = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     // Widget Customize
+    Widget buildTextFieldUsia(String judul, placeholder, IconData icon) {
+      if (judul.isEmpty) return null;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            judul,
+            style: TextStyle(
+                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          SizedBox(height: 10),
+          Container(
+            alignment: Alignment.centerLeft,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 6,
+                      offset: Offset(0, 2))
+                ]),
+            height: 60,
+            child: TextField(
+              keyboardType: TextInputType.number,
+              style: TextStyle(color: Colors.black87),
+              controller: controllerUsia,
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.only(top: 14),
+                  prefixIcon: Icon(
+                    icon,
+                    color: Color(0xff5ac18e),
+                  ),
+                  hintText: placeholder,
+                  hintStyle: TextStyle(color: Colors.black38)),
+            ),
+          )
+        ],
+      );
+    }
+
     Widget buildTextFieldBB(String judul, placeholder, IconData icon) {
       if (judul.isEmpty) return null;
       return Column(
@@ -108,6 +151,7 @@ class _SecondScreenState extends State<SecondScreen> {
                 ]),
             height: 60,
             child: TextField(
+              controller: controllerTT,
               keyboardType: TextInputType.number,
               style: TextStyle(color: Colors.black87),
               decoration: InputDecoration(
@@ -132,10 +176,8 @@ class _SecondScreenState extends State<SecondScreen> {
         // ignore: deprecated_member_use
         child: RaisedButton(
           onPressed: () {
-            setState(() {
-              _hasil1 = (int.parse(controllerBB.text) / _usia * 2) + 8;
-              // print(_hasil1);
-            });
+            _hitungBMI(double.parse(controllerBB.text),
+                double.parse(controllerTT.text));
           },
           padding: EdgeInsets.all(15),
           shape:
@@ -183,7 +225,7 @@ class _SecondScreenState extends State<SecondScreen> {
                   ])),
               child: SingleChildScrollView(
                 physics: AlwaysScrollableScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -195,33 +237,15 @@ class _SecondScreenState extends State<SecondScreen> {
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      height: 60,
+                      height: 30,
                     ),
-                    buildTextFieldBB("Berat Badan", "Masukan dalam satuan Kg",
-                        FontAwesomeIcons.weight),
+                    buildTextFieldUsia(
+                        "Usia", "Masukan usia anda", FontAwesomeIcons.userAlt),
                     SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xff5ac18e),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 6,
-                                offset: Offset(0, 2))
-                          ]),
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(15),
-                      child: Text(
-                        (_hasil1 == null) ? '' : "$_jk : $_hasil1",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
+                    buildTextFieldBB("Berat Badan", "Masukan dalam satuan Kg",
+                        FontAwesomeIcons.weight),
                     SizedBox(
                       height: 20,
                     ),
@@ -245,7 +269,7 @@ class _SecondScreenState extends State<SecondScreen> {
                       alignment: Alignment.center,
                       padding: EdgeInsets.all(15),
                       child: Text(
-                        "Rumus belum tau",
+                        "$_nilaiBMI",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -253,7 +277,30 @@ class _SecondScreenState extends State<SecondScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 20,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xff5ac18e),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 6,
+                                offset: Offset(0, 2))
+                          ]),
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(15),
+                      child: Text(
+                        "$_decissionBMI",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
                     ),
                     buildSubmitButton()
                   ],
