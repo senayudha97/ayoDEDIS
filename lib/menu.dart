@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'blank.dart';
 import 'Halaman1.dart';
+import 'Halaman2.dart';
 import 'bmi.dart';
 
 // ignore: must_be_immutable
@@ -120,7 +121,7 @@ class _HomeState extends State<Home> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Blank()),
+                              MaterialPageRoute(builder: (context) => Hal2()),
                             );
                           },
                           padding: EdgeInsets.all(15),
