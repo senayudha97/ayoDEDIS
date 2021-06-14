@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
-class Home extends StatefulWidget {
+class Bmi extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _BmiState createState() => _BmiState();
 }
 
-class _HomeState extends State<Home> {
+class _BmiState extends State<Bmi> {
   // Variable
   // ignore: unused_field
   var _usia;
