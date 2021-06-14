@@ -19,9 +19,9 @@ class _HomeState extends State<Home> {
   var _decissionBMI;
 
 // Method customize
-  void _hitungBMI(var bb, var tt) {
+  void _hitungBMI(var bb, var tb) {
     setState(() {
-      _nilaiBMI = bb / ((tt / 100) * (tt / 100));
+      _nilaiBMI = bb / ((tb / 100) * (tb / 100));
 
       if (_nilaiBMI < 18.5) {
         _decissionBMI = "BMI : Kurus";
