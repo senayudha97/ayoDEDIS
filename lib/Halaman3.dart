@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
-class Hal1 extends StatefulWidget {
+class Hal3 extends StatefulWidget {
   @override
-  _Hal1State createState() => _Hal1State();
+  _Hal3State createState() => _Hal3State();
 }
 
-class _Hal1State extends State<Hal1> {
+class _Hal3State extends State<Hal3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +77,7 @@ class _Hal1State extends State<Hal1> {
                       children: [
                         Padding(padding: EdgeInsets.all(10)),
                         Text(
-                          "Pengertian Stunting :",
+                          "Tanda dan Gejala :",
                           style: TextStyle(fontSize: 30),
                         ),
                         SizedBox(
@@ -85,11 +85,17 @@ class _Hal1State extends State<Hal1> {
                         ),
                         Container(
                           padding: EdgeInsets.only(left: 10),
-                          child: Text(
-                            "Stunting adalah masalah gizi kronis yang disebabkan oleh asupan gizi kurang dalam waktu yang cukup lama dan disebabkan pemberian makanan tidak sesuai maupun seimbang dengan kebutuhan gizi pada anak. Stunting dapat terjadi ketika anak masih dalam kandungan dan baru kelihatan saat anak berusia dua tahun. Kekurangan gizi pada anak usia dini meningkatkan angka kematian bayi dan anak, mudah sakit dan memiliki postur tubuh kurang ideal saat dewasa, kemampuan kognitif kurang , sehingga mengakibatkan penurunan kesejahteraan jangka panjang bagi bangsa(Kesehatan et al., 2020). ",
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(fontSize: 18),
-                          ),
+                          child: UnorderedList([
+                            "Tubuh yang berperawakan pendek dari anak seusianya",
+                            "Pertumbuhan melambat",
+                            "Wajah tampak lebih muda dari anak seusianya",
+                            "Pertumbuhan gigi terlambat",
+                            "Performa buruk pada kemampuan fokus dan memori belajarnya",
+                            "Usia 8-10 tahun anak menjadi lebih pendiam, tidak banyak melakukan kontak mata terhadap orang di sekitarnya",
+                            "Berat badan balita tidak naik bahkan cenderung menurun.",
+                            "Perkembangan tubuh anak terhambat, seperti telat menarche (menstruasi pertama anak perempuan).",
+                            "Anak mudah terserang berbagai penyakit infeksi."
+                          ]),
                         )
                       ],
                     ),
@@ -101,5 +107,44 @@ class _Hal1State extends State<Hal1> {
         ),
       ),
     ));
+  }
+}
+
+class UnorderedList extends StatelessWidget {
+  UnorderedList(this.texts);
+  final List<String> texts;
+
+  @override
+  Widget build(BuildContext context) {
+    var widgetList = <Widget>[];
+    for (var text in texts) {
+      // Add list item
+      widgetList.add(UnorderedListItem(text));
+      // Add space between items
+      widgetList.add(SizedBox(height: 5.0));
+    }
+
+    return Column(children: widgetList);
+  }
+}
+
+class UnorderedListItem extends StatelessWidget {
+  UnorderedListItem(this.text);
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(
+          "• ",
+          style: TextStyle(fontSize: 20),
+        ),
+        Expanded(
+          child: Text(text, style: TextStyle(fontSize: 20)),
+        ),
+      ],
+    );
   }
 }
